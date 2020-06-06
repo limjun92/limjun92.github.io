@@ -1,6 +1,7 @@
 {% assign navigation = site.data.navigation[include.nav] %}
 
 <nav class="nav__list">
+  안녕하세요
   {% if page.sidebar.title %}<h3 class="nav__title" style="padding-left: 0;">{{ page.sidebar.title }}</h3>{% endif %}
   <input id="ac-toc" name="accordion-toc" type="checkbox" />
   <label for="ac-toc">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle Menu" }}</label>
@@ -18,7 +19,6 @@
           {% for child in nav.children %}
             <li><a href="{{ child.url | relative_url }}"{% if child.url == page.url %} class="active"{% endif %}>{{ child.title }}</a></li>
           {% endfor %}
-          <li>ㅇㅇㅁㄴㄻㄴㅇ럼;닝러ㅐ;ㅁ넝라ㅣ;ㅓㅁㄴ이;러ㅣㅏㅁ;ㄴㅇ러</li>
         </ul>
         {% endif %}
       </li>
