@@ -157,10 +157,12 @@ pre {
 }
 .menu1{
     display: inline-block;
+    cursor: pointer;
     color: #222831;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     text-align: center;
+    
 }
 .menu1 ul.submenu{display: none;}
 .menu1:hover ul.submenu{display: block;}
@@ -171,8 +173,9 @@ pre {
   border-radius: 4px;
   color: #3d4144;
   text-decoration: none;
+  font-size: 17px;
   background-color: white;
-  width:120px;
+  width:105px;
   text-align: center;
 }
 
