@@ -1,6 +1,6 @@
 ---
-title: "Algorithm"
+title: "Category"
 layout: categories
-permalink: /algorithm/
+permalink: /category/
 author_profile: true
 ---
