@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Jun"
+title                    : "개발 노트"
 title_separator          : "공부중인 개발자 블로그"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Lim Junhyeong"
