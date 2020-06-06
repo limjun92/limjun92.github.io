@@ -178,10 +178,11 @@
   align-items: center;
   min-height: $nav-height;
   background: $background-color;
-
+ margin: 0 1rem;
   a {
+    padding: 10px 20px;
     display: block;
-    margin: 0 1rem;
+    // margin: 0 1rem;
     color: $masthead-link-color;
     text-decoration: none;
 

@@ -157,24 +157,22 @@ pre {
 }
 .menu1{
     display: inline-block;
-    margin: 0 1rem;
-    padding-right: 10px;
     color: #222831;
     text-decoration: none;
+    padding: 10px 20px;
+    text-align: center;
 }
 .menu1 ul.submenu{display: none;}
 .menu1:hover ul.submenu{display: block;}
 .menu1 ul.submenu > li:hover {background-color: #eee;}
 .submenu{
   position: absolute;
-  margin: 0 1rem;
   border: 1px solid #cecfd1;
   border-radius: 4px;
-  padding: 0.5em 1em;
   color: #3d4144;
   text-decoration: none;
   background-color: white;
-  width:12%;
+  width:120px;
   text-align: center;
 }
 
