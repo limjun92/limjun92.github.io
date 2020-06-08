@@ -8,7 +8,7 @@ tags:
   - JSON
   - AI
   - OPEN API
-last_modified_at: 2020-06-07
+last_modified_at: 2020-06-08
 ---
 #### [코로나19_mask_예제](https://github.com/limjun92/limjun92.github.io/blob/master/ipynb/corona19_mask.ipynb)
 
