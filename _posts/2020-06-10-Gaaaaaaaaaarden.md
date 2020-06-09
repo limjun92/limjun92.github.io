@@ -14,6 +14,7 @@ last_modified_at: 2020-06-10
 * 풀이시간 약 3시간 (combination을 두번 사용하는 부분, bfs를 한번만 사용하여 구현하는 부분)
 * bfs를 구현하면서 Green을 먼저 다 뿌진후에 Red를 뿌리기 때문에 Geean에서 Red로 변하는 순간에 집중해서 문제를 풀이했다.
 * 동시에 겹쳐지는 순간을 찾기 위해 3차 배열을 사용해서 구현했다.
+
 ```
 import java.util.ArrayList;
 import java.util.LinkedList;
