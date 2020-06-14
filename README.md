@@ -4,3 +4,7 @@
 * 인공지능 과제
 * 컴퓨터 활용능력 1급 실기
 * 30일 sqld 발표
+* * * 
+* page.scss .page 변경
+* base.scss .memu1 ~ submenu 추가
+* _includes masthead.html에 메뉴 관련 내용 추가
