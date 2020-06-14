@@ -6,5 +6,7 @@
 * 30일 sqld 발표
 * * * 
 * page.scss .page 변경
+    
+      오른쪽 공간 제거
 * base.scss .memu1 ~ submenu 추가
 * _includes masthead.html에 메뉴 관련 내용 추가
