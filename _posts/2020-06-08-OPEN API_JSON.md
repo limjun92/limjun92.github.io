@@ -1,7 +1,8 @@
 ---
 title:  "OPEN API JSON 읽어오기"
 excerpt: "파이썬 사용 공공데이터에서 코로나 마스크 정보 읽어오기"
-
+toc: true
+toc_sticky: true
 categories:
   - AI_개념
 tags:
