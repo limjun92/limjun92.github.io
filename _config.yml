@@ -17,7 +17,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 # Site Settings
 locale                   : "en-US"
 title                    : "개발 노트"
-title_separator          : "공부중인 개발자 블로그"
+title_separator          : "준형이 블로그"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Lim Junhyeong"
 description              : "공부중인 개발자 블로그."
