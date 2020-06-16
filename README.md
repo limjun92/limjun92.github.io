@@ -12,3 +12,4 @@
 * _includes masthead.html에 메뉴 관련 내용 추가
       
       
+bundle exec jekyll serve
