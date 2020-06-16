@@ -13,3 +13,6 @@
       
       
 bundle exec jekyll serve
+
+파싱
+=> 공공데이터 
