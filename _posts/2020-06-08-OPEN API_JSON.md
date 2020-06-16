@@ -6,6 +6,7 @@ toc_sticky: true
 categories:
   - AI_개념
 tags:
+  - Python
   - JSON
   - AI
   - OPEN API
