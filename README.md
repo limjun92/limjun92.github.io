@@ -16,3 +16,6 @@ bundle exec jekyll serve
 
 파싱
 => 공공데이터 
+
+https://nbviewer.jupyter.org/ 
+코랩창이 잘 열리지 않을 
