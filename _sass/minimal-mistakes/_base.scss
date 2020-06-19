@@ -163,7 +163,9 @@ pre {
     text-decoration: none;
     margin-top: 10px;
     text-align: center;
-    width: 100px;
+    //width: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .menu1 ul.submenu{display: none;}
 .menu1:hover ul.submenu{display: block;}
