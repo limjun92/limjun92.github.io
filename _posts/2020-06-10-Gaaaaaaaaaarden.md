@@ -16,7 +16,7 @@ last_modified_at: 2020-06-10
 * 동시에 겹쳐지는 순간을 찾기 위해 3차 배열을 사용해서 구현했다.  
 
 
-```
+```java
   import java.util.ArrayList;
   import java.util.LinkedList;
   import java.util.Queue;
