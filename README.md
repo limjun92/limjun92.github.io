@@ -19,3 +19,7 @@ bundle exec jekyll serve
 
 https://nbviewer.jupyter.org/ 
 코랩창이 잘 열리지 않을 
+
+# 인공지능
+  처음보는 딥러닝 수학  
+  이토록 쉬운 기초 수학
