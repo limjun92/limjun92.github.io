@@ -23,3 +23,10 @@ https://nbviewer.jupyter.org/
 # 인공지능
   처음보는 딥러닝 수학  
   이토록 쉬운 기초 수학
+
+* Quantoum classifier with tailored quantum kernel 
+      kaist, 기존 일공지능 기술 뛰어넘는 양자 인공지능 알고리즘 개발 
+      양자 컴퓨팅 논문
+      
+      
+      https://www.tensorflow.org/quantum?hl=ko
