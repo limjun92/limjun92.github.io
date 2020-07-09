@@ -596,9 +596,10 @@ Name: Born, dtype: datetime64[ns]
 6 1954-06-07  
 7 1855-02-23  
 Name: Died, dtype: datetime64[ns]  
-## 변수['새로운 컬럼할당','새로운 컴럼할당'] = (시계열데이터, 시계열 데이터)  
+
 
 ```python
+# 변수['새로운 컬럼할당','새로운 컴럼할당'] = (시계열데이터, 시계열 데이터)  
 scientists['born_dt'], scientists['died_dt'] = (born_datetime , died_datetime)
 print(scientists.head())
 ```
@@ -616,9 +617,10 @@ Name               Born        Died         Age   Occupation born_dt  \
 2 1910-08-13    
 3 1934-07-04    
 4 1964-04-14    
-## 새로운 컬럼에 할당 - 시계열 - 시계열
+
 
 ```python
+# 새로운 컬럼에 할당 - 시계열 - 시계열
 scientists['age_days_dt'] = (scientists['died_dt'] - scientists['born_dt'])
 print(scientists)
 ```
