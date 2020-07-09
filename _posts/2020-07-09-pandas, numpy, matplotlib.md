@@ -514,6 +514,8 @@ year
 2007    67.007423  
 Name: lifeExp, dtype: float64  
 
+![global_year_life](/assets/images/ai/global_year_life.PNG)
+
 ## 데이터프레임 만들기
 ```python
 corona_data = pd.DataFrame(
