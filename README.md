@@ -30,3 +30,6 @@ https://nbviewer.jupyter.org/
       
       
       https://www.tensorflow.org/quantum?hl=ko
+
+easyOCR
+이미지 안에 있는 텍스트를 가져온다
