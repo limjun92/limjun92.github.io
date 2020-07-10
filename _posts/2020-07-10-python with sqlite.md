@@ -40,11 +40,11 @@ cols = [column[0] for column in cursor.description]
 data_df = pd.DataFrame.from_records(data=rows, columns=cols)
 print(data_df)
 ```
-   date   open   high    low  closing  volumn
-0  20.07.08  55800  55900  53400    55000     357
-1  20.07.07  55800  55900  53400    55000     357
-2  20.07.08  55800  55900  53400    55000     357
-3  20.07.07  55800  55900  53400    55000     357
+   date   open   high    low  closing  volumn  
+0  20.07.08  55800  55900  53400    55000     357  
+1  20.07.07  55800  55900  53400    55000     357   
+2  20.07.08  55800  55900  53400    55000     357  
+3  20.07.07  55800  55900  53400    55000     357  
 # insert
 ```
 def write(title, content, username, cursor):
