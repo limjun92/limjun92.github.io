@@ -11,7 +11,7 @@ tags:
 last_modified_at: 2020-07-10
 ---
 # python with sqlite기본 
-```
+```python
 import sqlite3
 conn = sqlite3.connect('world.db')
 # jupyter lab에서는 db가 자동으로 생성된다.
@@ -30,7 +30,7 @@ for i in cursor.execute("select * from samsung"):
 ```
 
 # pandas 형태로 변환
-```
+```python
 import pandas as pd
 cursor.execute("SELECT * FROM samsung")
 rows = cursor.fetchall()
@@ -46,19 +46,19 @@ print(data_df)
 2  20.07.08  55800  55900  53400    55000     357  
 3  20.07.07  55800  55900  53400    55000     357  
 # insert
-```
+```python
 def write(title, content, username, cursor):
     cursor.execute("insert into feed values(?,?,?)",(title,content,username))
 ```
 
 # like 사용하기
-```
+```python
 def read(title, cursor):
   for i in cursor.execute("select * from feed where title like ?", ('%'+title+'%',)):
           print(f'{i[0]}{i[1]}{i[2]}')
 ```
 # table의 존재 확인
-```
+```python
 cursor.execute("select count(*) from sqlite_master where name = 'feed'")
     print(cursor.fetchone())
     if(cursor.fetchone()==0):
