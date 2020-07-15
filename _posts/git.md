@@ -18,3 +18,5 @@
 
 ## git reset --hard {커밋번호}
 이전내용으로 돌아가기
+
+## git remote add origin {주소}
