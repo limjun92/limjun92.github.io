@@ -20,3 +20,7 @@
 이전내용으로 돌아가기
 
 ## git remote add origin {주소}
+깃허브와 연결해주기
+
+## git push origin master 
+master라는 branch에 올리기
