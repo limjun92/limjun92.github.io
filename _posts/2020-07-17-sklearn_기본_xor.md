@@ -6,7 +6,6 @@ categories:
 tags:
   - AI
   - AI_Algorithm
-  - 정규 표현식
   - 머신러닝
 last_modified_at: 2020-07-17
 ---
