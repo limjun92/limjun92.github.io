@@ -1,3 +1,5 @@
+https://limjun92.github.io/
+
 * 다익스트라 정리하기
 * 플로이드 워셜 정리하기
 * 인공지능 강의
@@ -18,7 +20,7 @@ bundle exec jekyll serve
 => 공공데이터 
 
 https://nbviewer.jupyter.org/ 
-코랩창이 잘 열리지 않을 
+코랩창이 잘 열리지 않을 경우
 
 # 인공지능
   처음보는 딥러닝 수학  
