@@ -73,7 +73,7 @@ def load_abalone_dataset():
     #print(data)
 ```
 
-# B.2 파라미터 초기화 함수 정의 
+# 파라미터 초기화 함수 정의 
 
 ```python
 def init_model():
@@ -86,7 +86,7 @@ def init_model():
     #print(bias)
 ```
 
-# B.3 학습 및 평가 함수 정의
+# 학습 및 평가 함수 정의
 
 ```python
 def train_and_test(epoch_count, mb_size, report):
