@@ -1,4 +1,6 @@
 ---
+header:
+  teaser: /assets/images/ai/Word_Cloud_Alice.PNG
 title:  "WordCloud"
 excerpt: "WordCloud"
 categories:
@@ -11,6 +13,8 @@ tags:
   - python
 last_modified_at: 2020-07-20
 ---
+
+![Word_Cloud_Alice.PNG](/assets/images/ai/Word_Cloud_Alice.PNG) 
 
 # import
 ```python
