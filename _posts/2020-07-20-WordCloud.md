@@ -3,6 +3,8 @@ header:
   teaser: /assets/images/ai/Word_Cloud_Alice.PNG
 title:  "WordCloud"
 excerpt: "WordCloud"
+toc: true
+toc_sticky: true
 categories:
   - AI_개념
 tags:
