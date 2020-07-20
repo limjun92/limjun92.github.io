@@ -1,6 +1,4 @@
 ---
-header:
-  teaser: /assets/images/ai/Word_Cloud.PNG
 title:  "Deep learning with abalone"
 excerpt: "Deep learning 알고리즘을 활용하여 전복의 고리 수 추정"
 toc: true
