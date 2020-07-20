@@ -1,6 +1,8 @@
 ---
 title:  "sklearn_기본_xor"
 excerpt: "AI_Algorithm  sklearn_기본_xor"
+toc: true
+toc_sticky: true
 categories:
   - AI_개념
 tags:
