@@ -1,6 +1,6 @@
 ---
 title:  "Deep learning with abalone"
-excerpt: "Deep learning 단층퍼셉트론 알고리즘을 활용하여 전복의 고리 수 추정"
+excerpt: "Deep learning, 단층퍼셉트론, 회귀분석, 알고리즘을 활용하여 전복의 고리 수 추정"
 toc: true
 toc_sticky: true
 categories:
@@ -8,7 +8,7 @@ categories:
 tags:
   - AI
   - Deep learning
-  - 
+  - 회귀분석
 last_modified_at: 2020-07-17
 ---
 
