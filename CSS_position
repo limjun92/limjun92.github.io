@@ -1,0 +1,17 @@
+static 
+default 값
+-위에서 적용된 position 값을 초기화 시키고 싶을때 사용
+
+relative 
+static 이였을때의 위치를 기준으로 이동
+
+absolute
+position static이 아닌 부모가 있을 때 
+부모를 기준으로 움직임
+
+position static이 아닌 부모가 없을 때
+body를 기준으로 움직임
+
+fixed
+
+sticky
