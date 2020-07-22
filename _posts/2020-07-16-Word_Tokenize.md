@@ -7,8 +7,11 @@ toc: true
 toc_sticky: true
 categories:
   - AI_개념
+  - 자연어 처리
 tags:
   - AI
+  - 자연어 처리
+  - Word_Tokenize
 last_modified_at: 2020-07-16
 ---
 ```python
