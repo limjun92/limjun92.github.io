@@ -1,3 +1,18 @@
+---
+title:  "CSS_position, diplay"
+excerpt: "CSS_position, diplay"
+toc: true
+toc_sticky: true
+categories:
+  - AI_개념
+  - Web
+tags:
+  - Web
+  - CSS
+  - flex
+last_modified_at: 2020-07-24
+---
+
 # position
 
 ## :static 
