@@ -1,6 +1,6 @@
 ---
 title:  "CSS_position, diplay"
-excerpt: "CSS_position, diplay"
+excerpt: "CSS_position, diplay, flex"
 toc: true
 toc_sticky: true
 categories:
@@ -10,6 +10,8 @@ tags:
   - Web
   - CSS
   - flex
+  - position
+  - display
 last_modified_at: 2020-07-24
 ---
 
@@ -62,6 +64,8 @@ static 이였을때의 위치를 기준으로 이동
 # display:flex;
 * 요소를 자유자재로 위치 시킬 수 있다
 * Container와 Item으로 이루어져 있다
+
+https://heropy.blog/2018/11/24/css-flexible-box/
 
 ## flex-direction
 * items의 주축(main-axis)를 바꾼다
