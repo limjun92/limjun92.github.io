@@ -1,7 +1,7 @@
 ---
-title: "Beakjoon Algorithm"
+title: "Crawling"
 layout: category
-permalink: /category/Beakjoon_Algorithm/
+permalink: /category/Crawling/
 author_profile: true
-taxonomy: Baekjoon_Algorithm
+taxonomy: Crawling
 ---
