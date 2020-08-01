@@ -1,5 +1,5 @@
 ---
-title: "Beakjoon Algorithm"
+title: "Beakjoon_Algorithm"
 layout: category
 permalink: /category/Beakjoon_Algorithm/
 author_profile: true
