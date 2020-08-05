@@ -1,0 +1,395 @@
+# Pandas
+
+* 구조화된 데이터를 효과적으로 처리하고 저장할 수 있는 파이썬 라이브러리
+* Array 계산에 특화된 numpy를 기반으로 만들어져서 다양한 기능들을 제공한다
+
+# Series
+
+* numpy array가 보강된 형태 Data와 Index를 가지고 있다
+
+```python
+import pandas as pd
+
+data = pd.Series([1, 2, 3, 4])
+data
+# 0    1
+# 1    2
+# 2    3
+# 3    4
+# dtype: int64
+```
+
+* 인덱스를 가지고 있고 인덱스로 접근 가능하다
+* 딕셔너리와 비슷하다
+
+
+```python
+data = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
+data['b']
+# 2
+```
+
+* 딕셔너리로 만들 수 있다
+* pandas_series.values 는 Numpy array이다
+
+```python
+population_dict = {
+  'korea': 5180,
+  'japan': 12718,
+  'china': 141500,
+  'usa': 32676
+}
+population = pd.Series(population_dict)
+# china    141500
+# japan   12718
+# korea    5180
+# usa    32676
+# dtype: int64
+
+population.values
+# array([  5180,  12718, 141500,  32676], dtype=int64)
+```
+
+# DataFrame
+
+* 여러 개의 Series가 모여서 행과 열을 이룬 데이터
+
+```
+population_dict = {
+  'korea': 5180,
+  'japan': 12718,
+  'china': 141500,
+  'usa': 32676
+}
+gdp_dict = {
+  'korea': 169320000,
+  'japan': 516700000,
+  'china': 1409250000,
+  'usa': 2041280000
+}
+
+gdp = pd.Series(gdp_dict)
+country = pd.DataFrame({
+  'population': population,
+  'gdp': gdp
+})  
+
+country
+# 	  population	gdp
+# korea	5180	  169320000
+# japan	12718	  516700000
+# china	141500	1409250000
+# usa	  32676	  2041280000
+
+country.index
+# Index(['korea', 'japan', 'china', 'usa'], dtype='object')
+
+country.columns
+# Index(['population', 'gdp'], dtype='object')
+
+type(country['gdp'])
+# pandas.core.series.Series
+# columns값을 넣어서 관련된 값만 뽑으면 Series 타입이다
+```
+
+```python
+gdp_per_capita = country['gdp'] / country['population']
+country['gdp_per_capita'] = gdp_per_capita
+
+country
+#    population	    gdp	    gdp_per_capita
+# korea	5180	  169320000	  32687.258687
+# japan	12718	  516700000	  40627.457147
+# china	141500	1409250000	9959.363958
+# usa	  32676	  2041280000	62470.314604
+```
+
+# 저장과 불러오기
+
+* 만든 데이터 프레임을 저장할 수 있다
+
+```python
+country.to_csv("./country.csv")
+country.to_excel("country.xlsx")
+
+country = pd.read_csv("./country.csv")
+country = pd.read_excel("country.xlsx")
+# country는 데이터 프레임 형식이다
+```
+
+# Indexing & slicing
+
+## loc
+
+* 명시적인 인덱스를 참조하는 인덱싱/슬라이싱
+
+```python
+country.loc['china']
+# population        1.415000e+05
+# gdp               1.409250e+09
+# gdp_per_capita    9.959364e+03
+# Name: china, dtype: float64
+
+# Series 형식
+
+country.loc['korea':'japan',:'population']
+#       population
+# korea	5180
+# japan	12718
+
+# population이 포함된다
+```
+
+## iloc
+
+* 파이썬 스타일 정수 인덱스 인덱싱/슬라이싱
+
+```python
+country.iloc[0]
+# population        5.180000e+03
+# gdp               1.693200e+08
+# gdp_per_capita    3.268726e+04
+# Name: korea, dtype: float64
+
+country.iloc[0:2, :2]
+#     population	gdp
+# korea	5180	169320000
+# japan	12718	516700000
+```
+
+# 새 데이터 추가/수정
+
+* 리스트로 추가하는 방법과 딕셔너리로 추가하는 방법
+
+```python
+dataframe = pd.DataFrame(columns = ['이름','나이','주소'])
+dataframe.loc[0] = ['임원균', '26', '서울']
+dataframe.loc[1] = {'이름':'철수', '나이':'25', '주소':'인천'}
+dataframe
+#   이름	  나이	주소
+# 0	임원균	 26	   서울
+# 1		  25	  인천
+
+dataframe.loc[1, '이름'] = '영희'
+dataframe
+#   이름	  나이	주소
+# 0	임원균	 26	   서울
+# 1	영희	  25	  인천
+```
+
+* nan(Not a Number) : 값이 비어있다
+
+```python
+dataframe['전화번호'] = np.nan
+#	  이름	나이	주소	전화번호
+# 0	임원균	26	 서울	  NaN
+# 1	영희	 25	  인천	 NaN 
+
+dataframe.loc[0, '전화번호'] = '01012341234'
+#	  이름	나이	주소	전화번호
+# 0	임원균	26	 서울	  01012341234
+# 1	영희	 25	  인천	 NaN 
+
+len(dataframe)
+# 2
+```
+
+# 컬럼 선택하기
+
+* 컬럼이름이 하나만 있다면 Series
+* 리스트로 들어가 있다면 DataFrame
+
+```python
+dataframe["이름"]
+# 0    임원균
+# 1     영희
+# Name: 이름, dtype: object
+
+# 타입이 Series
+
+dataframe[["이름","주소","나이"]]
+#   이름	 주소	 나이
+# 0	임원균	서울	26
+# 1	영희	 인천	 25
+
+# 타입이 DataFrame
+```
+
+# 누락된 데이터 체크
+
+* 현실의 데이터는 누락되어 있는 형태가 많다
+* nan 또는 None
+
+## isnull(), notnull()
+
+```python
+dataframe.isnull()
+#   이름	 나이	  주소	전화번호
+# 0	False	False	False	False
+# 1	False	False	False	True
+
+dataframe.notnull()
+#	  이름	  나이	주소	전화번호
+# 0	True	True	True	True
+# 1	True	True	True	False
+```
+
+## dropna()
+
+```python
+dataframe.dropna()
+#   이름	나이	주소	전화번호
+# 0	임원균	26	서울	01012341234
+
+dataframe['전화번호'] = dataframe['전화번호'].fillna('전화번호 없음')
+#   이름	나이	주소	 전화번호
+# 0	임원균	26	 서울	  01012341234
+# 1	영희	 25	  인천	 전화번호 없음
+```
+
+## Series 연산
+
+* numpy array에서 사용했던 연산자들을 활용할 수 있다
+
+```python
+A = pd.Series([2, 4, 6], index = [0, 1, 2])
+# 0    2
+# 1    4
+# 2    6
+# dtype: int64
+
+B = pd.Series([1, 3, 5], index = [1, 2, 3])
+# 1    1
+# 2    3
+# 3    5
+# dtype: int64
+
+A + B
+# 0    NaN
+# 1    5.0
+# 2    9.0
+# 3    NaN
+# dtype: float64
+
+A.add(B, fill_value = 0)
+# 0    2.0
+# 1    5.0
+# 2    9.0
+# 3    5.0
+# dtype: float64
+```
+
+# DataFrame 연산
+
+* add(+), sub(-), mul(*), div(/)
+
+```python
+A = pd.DataFrame(np.random.randint(0, 10, (2, 2)), columns=list("AB"))
+#   A	B
+# 0	1	9
+# 1	7	5
+
+B = pd.DataFrame(np.random.randint(0, 10, (3, 3)), columns=list("BAC"))
+#   B	A	C
+# 0	9	4	5
+# 1	6	7	3
+# 2	3	0	2
+
+A + B
+#   A	B	C
+# 0	5.0	18.0	NaN
+# 1	14.0	11.0	NaN
+# 2	NaN	NaN	NaN
+
+A.add(B, fill_value=0)
+#   A	B	C
+# 0	5.0	18.0	5.0
+# 1	14.0	11.0	3.0
+# 2	0.0	3.0	2.0
+```
+
+# 집계함수
+
+* numpy array에서 사용했던 sum, mean등을 활용할 수 있다
+
+```python
+data = {
+  'A': [ i+5 for i in range(3) ],
+  'B': [ i**2 for i in range(3) ]
+}
+df = pd.DataFrame(data)
+#   A	B
+# 0	5	0
+# 1	6	1
+# 2	7	4
+
+df['A'].sum() 
+# 18
+
+df.sum()
+# A    18
+# B     5
+# dtype: int64
+
+df.mean()
+# A    6.000000
+# B    1.666667
+# dtype: float64
+```
+
+# DataFrame 정렬하기
+
+## 값으로 정렬하기
+
+* sort_values()
+
+```python 
+df = pd.DataFrame({
+  'col1' : [2, 1, 9, 8, 7, 4],
+  'col2' : ['A', 'A', 'B', np.nan, 'D', 'C'],
+  'col3' : [0, 1, 9, 4, 2, 3],
+})  
+#   col1	col2	col3
+# 0	2	A	0
+# 1	1	A	1
+# 2	9	B	9
+# 3	8	NaN	4
+# 4	7	D	2
+# 5	4	C	3
+
+df.sort_values('col1')
+#   col1	col2	col3
+# 1	1	A	1
+# 0	2	A	0
+# 5	4	C	3
+# 4	7	D	2
+# 3	8	NaN	4
+# 2	9	B	9
+
+df.sort_values('col1', ascending=False)
+#   col1	col2	col3
+# 2	9	B	9
+# 3	8	NaN	4
+# 4	7	D	2
+# 5	4	C	3
+# 0	2	A	0
+# 1	1	A	1
+
+df.sort_values(['col2', 'col1'])
+#   col1	col2	col3
+# 1	1	A	1
+# 0	2	A	0
+# 2	9	B	9
+# 5	4	C	3
+# 4	7	D	2
+# 3	8	NaN	4
+
+df.sort_values(['col2','col1'] ,ascending = [True,False])
+#   col1 col2  col3
+# 0     2    A     0
+# 1     1    A     1
+# 2     9    B     9
+# 5     4    C     3
+# 4     7    D     2
+# 3     8  NaN     4
+```
