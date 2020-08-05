@@ -266,6 +266,9 @@ upper, lower = np.split(matrix, [3], axis=1)
 
 # numpy 연산
 
+* 시간 복잡도 비교
+* 루프와 비교해서 빠르다
+
 ```python
 def add_five_to_array(values):
   output = np.empty(len(values))
@@ -275,3 +278,134 @@ def add_five_to_array(values):
   
 values = np.random.randint(1, 10, size=5)
 add_five_to_array(values)
+
+big_array = np.random.randint(1, 100, size = 10000000)
+
+add_five_to_array(big_array)
+# 5.3 s의 시간이 걸린다
+# ====================================================
+big_array + 5
+# 33.5 ms의 시간이 걸린다 
+```
+
+* array는 +,-,*,/ 에대한 기본 연산을 지원한다  
+
+```python
+x = np.arange(4)
+# array([0, 1, 2, 3])
+
+x + 5
+# array([5 ,6 ,7 ,8])
+
+x - 5
+# array([-5, -4, -3, -2])
+
+x * 5
+# array([0, 5, 10, 15])
+
+x / 5
+# array([0. , 0.2, 0.4, 0.6])
+```
+
+* 다차원 행렬에서도 적용가능하다
+
+```python
+x = np.arange(4).reshape((2, 2))
+y = np.random.randint(10, size=(2, 2))
+
+x + y
+# array([[1, 7],
+         [6, 5]])
+         
+x - y
+# array([[-1, -5],
+#        [-2, 1]])
+```
+
+# Broadcasting
+
+* shape이 다른 array끼리 연산 
+
+```
+# matrix + 5
+|2|4|2| + |5|
+|6|5|9|
+|9|4|7|
+
+= |7 |9 |7 |
+  |11|10|14|
+  |14|9 |12|
+```
+
+```
+# matrix = np.array([1, 2, 3])
+|2|4|2| + |1|2|3|
+|6|5|9|
+|9|4|7|
+
+= |3 |6 |5 |
+  |7 |7 |12|
+  |10|6 |10|
+```
+
+```
+# np.arange(3).reshape((3,1)) + np.arange(3)
+|0| + |0|1|2|
+|1|
+|2|
+
+= |0|1|2|
+  |1|2|3|
+  |2|3|4|
+```
+
+# 집계함수 
+
+* 집계: 데이터에 대한 요약 통계를 본 수 있다
+
+```python
+x = np.arange(8).reshape((2,4))
+np.sum(x)
+# 28
+
+np.min(x)
+# 0
+
+np.max(x)
+# 7
+
+np.mean(x)
+# 3.5
+
+np.std(x)
+# 2.29128784747792
+```
+
+* 축을 사용해서 집계
+
+```python
+x = np.arange(8).reshape((2,4))
+np.sum(x, axis=0)
+# array([4, 6, 8, 10])
+
+np.sum(x, axis=1)
+# array([6, 22])
+```
+
+# 마스킹 연산
+
+* True, False array를 통해서 특정 값들을 뽑아내는 방법
+
+```python
+x = np.arange(5)
+# array([0, 1, 2, 3, 4])
+
+x < 3
+# array([True, True, True, False, False])
+
+x > 5
+# array([False, False, False, False, False])
+
+x[x < 3]
+# array([0, 1, 2])
+```
