@@ -1,0 +1,277 @@
+* 데이터를 배열로 보는 방법
+
+* numpy는 list에 비해서 빠른 연산을 지원하고 메모리를 효율적으로 사용한다.
+
+* 리스트의 초기화
+```python
+list(range(10))
+# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+# numpy 초기화
+
+```python
+import numpy as np
+np.array([1, 2, 3, 4, 5])
+# array([1, 2, 3, 4, 5])
+```
+
+* 리스트로부터 배열 만들기
+
+```python
+np.array([1, 2, 3, 4, 5])
+# array([1, 2, 3, 4, 5])
+
+np.array([3, 1.4, 2,3, 4])
+# array([3., 1.4, 2., 3., 4.])
+# 하나라도 실수라면 모두 실수로 만든다
+
+np.array([[1, 2],
+          [3, 4]])
+# array([[1, 2],
+#        [3, 4]])        
+         
+np.array([1, 2, 3, 4],dtype='float')
+# array([1., 2., 3., 4.])
+
+np.arange(7)
+# array([0, 1, 2, 3, 4, 5, 6])
+
+np.empty(5)
+# 빈 배열을 만들어 준다
+```
+
+## 배열 데이터 타입 dtype
+* Python List와 다르게 array는 단일타입으로 구선된다
+
+```python
+arr = np.array([1, 2, 3, 4], dtype=float)
+arr 
+# array(1., 2., 3., 4.])
+
+arr.dtype
+# dtype('float64')
+```
+
+## .astype()
+* 타입을 바꾸어 준다
+
+```python
+arr.astype(int)
+# array([1, 2, 3, 4])
+```
+
+|dtype|설명|다양한 표현|
+|:----:|:---:|:---:|
+|int|정수형 타입|i, int_, int32, int64, i8|
+|float|실수형 타입|f, float_, float32, float64, f8|
+|str|문자열 타입|str, U, U32|
+|bool|부울 타입|?, bool_|
+
+## 다양한 배열 만들기
+
+```python 
+np.zeros(10, dtype=int)
+# array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+# 10*1 행렬로 0을 int 타입으로 만들어 준다
+
+np.ones((3,5), dtype=float)
+# array([1., 1., 1., 1., 1.],
+#       [1., 1., 1., 1., 1.],
+#       [1., 1., 1., 1., 1.]])
+# 3*5 행렬로 1을 float 타입으로 만들어 준다
+
+np.arange(0, 20, 2)
+# array([0, 2, 4, 6, 8, 10, 12, 14, 16, 18])
+# 0부터 20까지 2씩 더해 가면서 만들어 준다
+
+np.linspace(0, 1, 5)
+# array([0., 0.25, 0.5, 0.75, 1.])
+# 0부터 1까지 5개로 같은 간격으로 나누어 만들어 준다
+```
+
+## 난수로 채워진 배열 만들기
+
+```python
+np.random.random((2,2))
+# array([[0.31231231, 0.5235842],
+#       [[0.34565656, 0.1235673]])
+# 인자로 튜플을 받아 shape를 만든다
+
+np.random.normal(0,1,(2,2))
+# array([[0.31231231, 0.5235842],
+#       [[-0.34565656, -0.1235673]])
+# 평균이 0이고 표준 편차가 1인 값을 2*2행렬로 만든다
+
+np.random.randint(0,10,(2,2))
+# array([[3, 9],
+#       [[3, 2]])
+# 0 ~ 10 의 int 값을 랜덤으로 하여 만들어 준다
+```
+
+# 배열의 기초
+
+```python
+x2 = np.random.randint(10, size=(3, 4))
+# array([[2, 2, 9, 0],
+#        [4, 2, 1, 0],
+#        [1, 8, 7, 3]])
+         
+x2.ndim # 2
+# 배열의 차원
+
+x2.shape # (3, 4)
+# 배열의 모양
+
+x2.size # 12
+# 배열의 원소 수
+
+x2.dtype # dtype('int64')
+# 배열릐 데이터 타입
+```
+
+## Indexing
+
+* Indexing: 인덱스로 값을 찾아낸다
+
+```python
+x = np.arange(7)
+# array([0, 1, 2, 3, 4, 5, 6])
+
+x[3]
+# 3
+
+x[7]
+# IndexError: index 7 is out of bounds
+
+x[0] = 10
+# array([10, 1, 2, 3, 4, 5, 6])
+```
+
+* Slicing: 인덱스 값으로 배열의 부분을 가져오는 것
+* list와 사용법이 같다
+
+```python
+x = np.arange(7)
+# array([0, 1, 2, 3, 4, 5, 6])
+
+x[1:4]
+# array([1, 2, 3])
+
+x[1:]
+# array([1, 2, 3, 4, 5, 6)]
+
+x[:4]
+# array([0, 1, 2, 3])
+
+x[::2]
+# array([0, 2, 4, 6])
+# index를 2씩 건너뛰면서 가져온다
+```
+
+# 모양 바꾸기
+
+## reshape
+
+* reshape:array의 shape를 변경한다
+
+```python
+x = np.arange(8)
+x.shape
+# (8,)
+
+x2 = x.reshape((2,4))
+# array([[0, 1, 2, 3],
+#        [4, 5, 6, 7]])
+         
+x2.shape
+# (2, 4)
+```
+
+# 이어 붙이고 나누고
+
+* concatenate: array를 이어 붙인다
+
+```python
+x = np.array([0, 1, 2])
+y = np.array([3, 4, 5])
+np.concatenate([x, y])
+# array([0, 1, 2, 3, 4, 5])
+```
+## concatenate
+* np.concatenate:axis 축을 기준으로 이어붙일 수 있다
+
+```python
+matrix = np.arange(4),reshape(2,2)
+# array([0, 1], 
+#       [2, 3])
+np.concatenate([matrix, matrix], axis=0)
+# array([0, 1], 
+#       [2, 3],
+#       [0, 1],
+#       [3, 4])
+# axis=0은 세로방향
+```
+```python
+matrix = np.arange(4),reshape(2,2)
+# array([0, 1], 
+#       [2, 3])
+np.concatenate([matrix, matrix], axis=1)
+# array([0, 1, 0, 1], 
+#       [2, 3, 2, 3])
+# axis=1은 가로방향
+```
+
+## split
+
+* np.split:axis 축을 기준으로 나눌 수 있다
+
+* 세로로 나누기
+  
+```python
+matrix = np.arange(16).reshape(4, 4)
+# array([0, 1, 2, 3], 
+#       [4, 5, 6, 7],
+#       [8, 9, 10, 11],
+#       [12, 13, 14, 15])
+upper, lower = np.split(matrix, [3], axis=0)
+# upper
+# array([0, 1, 2, 3], 
+#       [4, 5, 6, 7],
+#       [8, 9, 10, 11])
+# lower
+# array([12, 13, 14, 15])
+```
+
+* 가로로 나누기
+  
+```python
+matrix = np.arange(16).reshape(4, 4)
+# array([0, 1, 2, 3], 
+#       [4, 5, 6, 7],
+#       [8, 9, 10, 11],
+#       [12, 13, 14, 15])
+upper, lower = np.split(matrix, [3], axis=1)
+# upper
+# array([0, 1, 2], 
+#       [4, 5, 6],
+#       [8, 9, 10],
+#       [12, 13, 14)
+# lower
+# array([3],
+#       [7],
+#       [11],
+#       [15])
+```
+
+# numpy 연산
+
+```python
+def add_five_to_array(values):
+  output = np.empty(len(values))
+  for i in range(len(values)):
+    output[i] = values[i] + 5
+  return output
+  
+values = np.random.randint(1, 10, size=5)
+add_five_to_array(values)
