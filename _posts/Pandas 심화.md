@@ -1,0 +1,336 @@
+# 조건으로 검샘하기
+
+* import array와 마찬가지로 masking 연산이 가능하다
+
+```python
+import numpy as np
+import pandas as pd
+df = pd.DataFrame(np.random.rand(5, 2), columns = ['A','B'])
+#   A	B
+# 0	0.082643	0.060151
+# 1	0.458029	0.336073
+# 2	0.542312	0.850756
+# 3	0.308405	0.878746
+# 4	0.698897	0.393805
+
+df['A'] < 0.5
+# 0     True
+# 1     True
+# 2    False
+# 3     True
+# 4    False
+# Name: A, dtype: bool
+```
+
+```python
+import numpy as np
+import pandas as pd
+df = pd.DataFrame(np.random.rand(5, 2), columns = ['A','B'])
+df[(df["A"] < 0.5) & (df["B"] > 0.3)]
+df.query("A < 0.5 and B > 0.3")
+#   A	B
+# 0	0.146824	0.988963
+# 3	0.167327	0.744833
+```
+
+* 문자열이라면 다른 방식으로도 조건 검색이 가능하다
+
+```python
+df = pd.DataFrame([["Dog", "Happy"],
+                   ["Cat", "Sam"],
+                   ["Cat", "Toby"],
+                   ["Pig", "Mini"],
+                   ["Cat", "Rocky"]], columns = ['Animal','Name'])
+df["Animal"].str.contains("Cat")
+df.Animal.str.match("Cat")
+# 0    False
+# 1     True
+# 2     True
+# 3    False
+# 4     True
+# Name: Animal, dtype: bool
+```
+
+# 함수로 데이터 처리하기
+
+* apply를 통해서 함수로 데이터를 다룰 수 있다
+
+```python
+df = pd.DataFrame(np.arange(5), columns=["Num"])
+def square(x):
+  return x*2
+df["Num"].apply(square)
+# 0    0
+# 1    2
+# 2    4
+# 3    6
+# 4    8
+# Name: Num, dtype: int64
+
+df["square"] = df.Num.apply(lambda x: x**2)
+#   Num  square
+# 0    0       0
+# 1    1       1
+# 2    2       4
+# 3    3       9
+# 4    4      16
+```
+
+* 예제
+
+```python
+df = pd.DataFrame(columns=["phone"])
+df.loc[0] = "010-1234-1235"
+df.loc[1] = "공일공-일이삼사-1235"
+df.loc[2] = "010.1234.일이삼오"
+df.loc[3] = "공1공-1234.1이3오"
+df["preprecess_phone"] = ''
+#   phone	preprecess_phone
+# 0	010-1234-1235	
+# 1	공일공-일이삼사-1235	
+# 2	010.1234.일이삼오	
+# 3	공1공-1234.1이3오	
+
+def get_preprocess_phone(phone):
+  mapping_dict = {
+    "공" : "0",
+    "일" : "1",
+    "이" : "2",
+    "삼" : "3",
+    "사" : "4",
+    "오" : "5",
+    "-" : "",
+    "." : ""
+  }
+  for key, value in mapping_dict.items():
+    phone = phone.replace(key, value)
+  return phone
+df["preprecess_phone"] = df["phone"].apply(get_preprocessed_phonenumber)
+#   phone	preprecess_phone
+# 0	010-1234-1235	01012341235
+# 1	공일공-일이삼사-1235	01012341235
+# 2	010.1234.일이삼오	01012341235
+# 3	공1공-1234.1이3오	01012341235
+```
+
+* replace: apply 기능에서 데이터 값만 대체 하고 싶을때
+
+```python
+df = pd.DataFrame(["Male","Male","Female","Femaile","Male"],columns=["Sex"])
+#   Sex
+# 0    Male
+# 1    Male
+# 2  Female
+# 3  Female
+# 4    Male
+
+df.Sex.replace({"Male": 0, "Female": 1})
+df.Sex.replace({"Male": 0, "Female": 1}, inplace = True)
+# 0    0
+# 1    0
+# 2    1
+# 3    1
+# 4    0
+# Name: Sex, dtype: int64
+```
+
+# 그룹으로 묶기(groupby)
+
+* 간단한 집계를 넘어서서 조건부로 집계하고 싶은 경우
+
+```python
+df = pd.DataFrame({'key':['A', 'B', 'C', 'A', 'B', 'C'],
+  'data1' : [1, 2, 3, 1, 2, 3], 'data2': np.random.randint(0, 6, 6)})
+df.groupby('key')
+# <pandas.core.groupby.generic.DataFrameGroupBy object at 0x000001CA2C72CCC8>
+
+df.groupby('key').sum()
+#   data1	data2
+# key		
+# A	2	5
+# B	4	2
+# C	6	5
+
+df.groupby(['key','data1']).sum()
+#     data2
+# key	data1	
+# A	1	5
+# B	2	2
+# C	3	5
+```
+
+## aggregate
+
+* groupby를 통해 집계를 한번에 계산하는 방법
+
+```python
+df.groupby('key').aggregate(['min',np.median, max])
+#         data1	data2
+#   min	median	max	min	median	max
+# key						
+# A	1	1	1	1	2.5	4
+# B	2	2	2	0	1.0	2
+# C	3	3	3	0	2.5	5
+
+df.groupby('key').aggregate({'data1':'min', 'data2':np.sum})
+#   data1	data2
+# key		
+# A	1	5
+# B	2	2
+# C	3	5
+```
+
+## filter
+
+* groupby를 통해서 그룹 속성을 기준으로 데이터 필터링
+
+```python
+df = pd.DataFrame({'key':['A', 'B', 'C', 'A', 'B', 'C'],
+  'data1' : [1, 2, 3, 1, 2, 3], 'data2': np.random.randint(0, 6, 6)})
+df.groupby('key')
+#   key	data1	data2
+# 0	A	1	4
+# 1	B	2	4
+# 2	C	3	4
+# 3	A	1	3
+# 4	B	2	2
+# 5	C	3	4
+
+def filter_by_mean(x):
+  return x['data2'].mean() > 3
+df.groupby('key').mean()
+#   data1	data2
+# key		
+# A	1	3.5
+# B	2	3.0
+# C	3	4.0
+
+df.groupby('key').filter(filter_by_mean)
+#   key	data1	data2
+# 0	A	1	4
+# 2	C	3	4
+# 3	A	1	3
+# 5	C	3	4
+```
+
+## apply
+
+* groupby를 통해서 묶인 데이터를 함수 적용
+
+```python
+df.groupby('key').apply(lambda x: x.max() - x.min())
+# 	data1	data2
+# key		
+# A	0	1
+# B	0	2
+# C	0	0
+```
+
+## get_group
+
+* groupby롤 묶인 데이터에서 key값으로 데이터를 가져올 수 있다
+
+```python 
+df = pd.read_csv("./univ.csv")
+df.head()
+#   시도      학교명
+# 0 충남  충남도립청양대학
+# 1 경기  한국복지대학교
+# 2 경북  가톨릭상지대학교
+# 3 전북  군산간호대학교
+# 4 경남  거제대학교
+
+df.groupby("시도").get_group("충남")
+#   시도      학교명
+# 0 충남  충남도립청양대학
+# 44 충남  신성대학교
+# 60 충남  백석문화대학교
+# 67 충남  혜전대학교
+# 92 충남  아주자동차대학
+# 112 충남  천안연암대학
+
+len(df.groupby("시도").get_group("충남"))
+# 94
+```
+
+# MultiIndex
+
+* 인덱스를 계층적으로 만들 수 있다
+
+```python
+df = pd.dataFrame(
+  np.random.randn(4, 2),
+  index = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]],
+  columns = ['data1', 'data2']
+)
+#   data1	data2
+# A	1	-0.096399	-1.648663
+# 2	0.594642	-1.407714
+# B	1	1.058022	0.920752
+# 2	0.317844	0.754203
+```
+
+* 열 인덱스도 계층적으로 만들 수 있다
+
+
+
+```python
+df = pd.DataFrame(
+  np.random.randn(4, 5),
+  columns=[["A", "A", "B", "B"], ["1", "2", "1", "2"]]
+)
+#       A	B
+#   1	2	1	2
+# 0	0.098990	0.215629	0.541086	-0.396231
+# 1	-1.281989	0.998911	0.545508	-0.542915
+# 2	-0.288780	1.242643	0.045207	0.490949
+# 3	-0.271796	-0.404544	0.654215	0.664623
+```
+
+* 다중 인덱스 컴럼의 경우 인덱싱은 계층적으로 한다
+* 인덱스 탐색의 경우에는 loc, iloc를 사용가능하다
+
+```python
+df["A"]
+#   1	2
+# 0	0.098990	0.215629
+# 1	-1.281989	0.998911
+# 2	-0.288780	1.242643
+# 3	-0.271796	-0.404544
+
+df["A"]["1"]
+# 0    0.098990
+# 1   -1.281989
+# 2   -0.288780
+# 3   -0.271796
+# Name: 1, dtype: float64
+```
+
+# pivot_table
+
+* 데이터에서 필요한 자료만 뽑아서 새롭게 요약
+* 분석 할 수 있는 기능 엑셀에서의 피봇 테이블과 같다
+* index는 행 인덱스로 들어갈 key
+* column에 열 인덱스로 라벨링될 값
+* value에 분석할 데이터
+
+```python 
+# use titanic데이터
+df.pivot_table(
+  index='sex', columns = 'class', values='survived',
+  aggfunc = np.mean
+)
+# class   First  Second  Third
+# sex
+# female  0.968085 0.921053 0.500000
+# male    0.368852 0.157407 0.135447
+
+df.pivot_table(
+  index = "월별", columns='내역', values = ['수입','지출'])
+#       수입               지출
+# 내역  관리비 교통비 월급  관리비 교통비 월급
+# 월별
+# 201805  0 0 400000  200000  50000 0
+# 201806  0 0 500000  300000  100000  0
+# 201807  0 0 600000  250000  150000  0
+```
