@@ -35,3 +35,7 @@ https://nbviewer.jupyter.org/
 
 easyOCR
 이미지 안에 있는 텍스트를 가져온다
+
+# 크롤링 
+api로 크롤링 할때 param
+https://curl.trillworks.com/
