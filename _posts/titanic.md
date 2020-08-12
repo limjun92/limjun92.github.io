@@ -91,7 +91,7 @@ msno.matrix(train_data, figsize=(12,6))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x24714011a08>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1e7363bdc88>
 
 
 
@@ -181,7 +181,7 @@ df.plot(kind = 'bar', stacked = True, figsize=(10, 10))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x247145464c8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1e7368d43c8>
 
 
 
@@ -565,17 +565,17 @@ train['Title'].value_counts()
     Master       40
     Dr            7
     Rev           6
-    Mlle          2
-    Major         2
     Col           2
-    Lady          1
-    Jonkheer      1
+    Major         2
+    Mlle          2
     Ms            1
-    Countess      1
     Sir           1
     Mme           1
-    Capt          1
     Don           1
+    Capt          1
+    Countess      1
+    Jonkheer      1
+    Lady          1
     Name: Title, dtype: int64
 
 
@@ -592,8 +592,8 @@ test['Title'].value_counts()
     Miss       78
     Mrs        72
     Master     21
-    Rev         2
     Col         2
+    Rev         2
     Dona        1
     Ms          1
     Dr          1
@@ -668,11 +668,100 @@ train.head(1)
 
 
 ```python
-title_mapping = {"Mr":0, "Miss":1, "Mrs":2,
-                "Master":0, "Dr":3, "Rev":3, "Col": 3, 'Ms': 2, 'Mlle': 3, "Major": 3, 'Lady': 2, 'Capt': 3,
-                 'Sir': 0, 'Dona': 3, 'Mme':3, 'Jonkheer': 1, 'Countess': 3 ,'Don':3}
+
+```
+
+
+```python
+
+rarelist = []
+for a in set(train['Title']):
+      if list(train['Title']).count(a)<10:
+            rarelist.append(a)
+    
+for dataset in train_test_data:
+      dataset['Title'] = dataset['Title'].replace('Mlle','Miss')
+      dataset['Title'] = dataset['Title'].replace('Ms','Miss')
+      dataset['Title'] = dataset['Title'].replace('Mmm','Mrs')
+      dataset['Title'] = dataset['Title'].replace(rarelist,'Rare')
+  
+train[['Title','Survived']].groupby(['Title'],as_index=False).mean()
+
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Title</th>
+      <th>Survived</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Master</td>
+      <td>0.575000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Miss</td>
+      <td>0.702703</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mr</td>
+      <td>0.156673</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mrs</td>
+      <td>0.792000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rare</td>
+      <td>0.375000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+title_mapping = {"Master":1, "Miss":2,"Mr":3, "Mrs":4, "Rare":5}
+
 for dataset in train_test_data:
     dataset['Title'] = dataset['Title'].map(title_mapping)
+    dataset['Title'] = dataset['Title'].fillna(0)
+```
+
+
+```python
+# title_mapping = {"Mr":0, "Miss":1, "Mrs":2,
+#                 "Master":0, "Dr":3, "Rev":3, "Col": 3, 'Ms': 2, 'Mlle': 3, "Major": 3, 'Lady': 2, 'Capt': 3,
+#                  'Sir': 0, 'Dona': 3, 'Mme':3, 'Jonkheer': 1, 'Countess': 3 ,'Don':3}
+# for dataset in train_test_data:
+#     dataset['Title'] = dataset['Title'].map(title_mapping)
 ```
 
 
@@ -729,7 +818,7 @@ train.head(2)
       <td>7.2500</td>
       <td>NaN</td>
       <td>S</td>
-      <td>0</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>1</th>
@@ -744,7 +833,7 @@ train.head(2)
       <td>71.2833</td>
       <td>C85</td>
       <td>C</td>
-      <td>2</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -804,7 +893,7 @@ test.head(2)
       <td>7.8292</td>
       <td>NaN</td>
       <td>Q</td>
-      <td>0</td>
+      <td>3.0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -818,7 +907,7 @@ test.head(2)
       <td>7.0000</td>
       <td>NaN</td>
       <td>S</td>
-      <td>2</td>
+      <td>4.0</td>
     </tr>
   </tbody>
 </table>
@@ -888,7 +977,7 @@ train.head(1)
       <td>7.25</td>
       <td>NaN</td>
       <td>S</td>
-      <td>0</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -964,7 +1053,7 @@ train['Age'][:10]
     2    26.0
     3    35.0
     4    35.0
-    5    28.0
+    5    30.0
     6    54.0
     7     2.0
     8    27.0
@@ -1009,12 +1098,12 @@ train[['AgeBand','Survived']].groupby('AgeBand', as_index=False).mean().sort_val
     <tr>
       <th>0</th>
       <td>(0.34, 16.336]</td>
-      <td>0.550000</td>
+      <td>0.548077</td>
     </tr>
     <tr>
       <th>1</th>
       <td>(16.336, 32.252]</td>
-      <td>0.328713</td>
+      <td>0.327345</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1102,7 +1191,7 @@ train.head(3)
       <td>7.2500</td>
       <td>NaN</td>
       <td>S</td>
-      <td>0</td>
+      <td>3</td>
       <td>(16.336, 32.252]</td>
     </tr>
     <tr>
@@ -1118,7 +1207,7 @@ train.head(3)
       <td>71.2833</td>
       <td>C85</td>
       <td>C</td>
-      <td>2</td>
+      <td>4</td>
       <td>(32.252, 48.168]</td>
     </tr>
     <tr>
@@ -1134,7 +1223,7 @@ train.head(3)
       <td>7.9250</td>
       <td>NaN</td>
       <td>S</td>
-      <td>1</td>
+      <td>2</td>
       <td>(16.336, 32.252]</td>
     </tr>
   </tbody>
@@ -1186,12 +1275,12 @@ df.plot(kind = 'bar', stacked = True, figsize=(10, 5))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x24712ce37c8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1e73680ba88>
 
 
 
 
-![png](titanic_files/titanic_32_1.png)
+![png](titanic_files/titanic_35_1.png)
 
 
 
@@ -1294,7 +1383,7 @@ train.head(2)
       <td>7.2500</td>
       <td>NaN</td>
       <td>0</td>
-      <td>0</td>
+      <td>3</td>
       <td>(16.336, 32.252]</td>
     </tr>
     <tr>
@@ -1310,7 +1399,7 @@ train.head(2)
       <td>71.2833</td>
       <td>C85</td>
       <td>2</td>
-      <td>2</td>
+      <td>4</td>
       <td>(32.252, 48.168]</td>
     </tr>
   </tbody>
@@ -1371,7 +1460,7 @@ test.head(2)
       <td>7.8292</td>
       <td>NaN</td>
       <td>1</td>
-      <td>0</td>
+      <td>3.0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1385,7 +1474,7 @@ test.head(2)
       <td>7.0000</td>
       <td>NaN</td>
       <td>0</td>
-      <td>2</td>
+      <td>4.0</td>
     </tr>
   </tbody>
 </table>
@@ -1551,7 +1640,7 @@ train.head(3)
       <td>0.0</td>
       <td>NaN</td>
       <td>0</td>
-      <td>0</td>
+      <td>3</td>
       <td>(16.336, 32.252]</td>
       <td>(-0.512, 102.466]</td>
     </tr>
@@ -1568,7 +1657,7 @@ train.head(3)
       <td>0.0</td>
       <td>C85</td>
       <td>2</td>
-      <td>2</td>
+      <td>4</td>
       <td>(32.252, 48.168]</td>
       <td>(-0.512, 102.466]</td>
     </tr>
@@ -1585,7 +1674,7 @@ train.head(3)
       <td>0.0</td>
       <td>NaN</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
       <td>(16.336, 32.252]</td>
       <td>(-0.512, 102.466]</td>
     </tr>
@@ -1656,7 +1745,7 @@ train.head(1)
       <td>0.0</td>
       <td>NaN</td>
       <td>0</td>
-      <td>0</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -1723,7 +1812,7 @@ train.head(1)
       <td>A/5 21171</td>
       <td>0.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -1788,7 +1877,7 @@ train.head(1)
       <td>0</td>
       <td>0.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -1844,7 +1933,7 @@ test.head(1)
       <td>0</td>
       <td>0.0</td>
       <td>1</td>
-      <td>0</td>
+      <td>3.0</td>
     </tr>
   </tbody>
 </table>
@@ -1856,6 +1945,101 @@ test.head(1)
 ```python
 train['FamilySize'] = train['SibSp'] + train['Parch'] + 1
 test['FamilySize'] = test['SibSp'] + test['Parch'] + 1
+
+train[['FamilySize','Survived']].groupby('FamilySize', as_index=False).mean().sort_values(by='Survived',ascending=False)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FamilySize</th>
+      <th>Survived</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>0.724138</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.578431</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.552795</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>0.333333</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.303538</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.200000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>0.136364</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>11</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+train["FamilySize"].value_counts
+
+for dataset in train_test_data:
+    dataset['isAlone'] = 0
+    dataset.loc[dataset['FamilySize'] == 1, 'isAlone'] = 1
+```
+
+
+```python
+family_mapping = {1:0,2:0.4,3:0.8,4:1.2,5:1.6,6:2, 7:2.4, 8:2.8,9:3.2,10:3.6,11:4}
+for dataset in train_test_data:
+    dataset['FamilySize'] = dataset['FamilySize'].map(family_mapping)
 ```
 
 
@@ -1870,12 +2054,12 @@ plt.xlim(0)
 
 
 
-    (0, 11.0)
+    (0, 4.0)
 
 
 
 
-![png](titanic_files/titanic_52_1.png)
+![png](titanic_files/titanic_57_1.png)
 
 
 
@@ -1915,6 +2099,7 @@ train.head(1)
       <th>Embarked</th>
       <th>Title</th>
       <th>FamilySize</th>
+      <th>isAlone</th>
     </tr>
   </thead>
   <tbody>
@@ -1929,8 +2114,9 @@ train.head(1)
       <td>0</td>
       <td>0.0</td>
       <td>0</td>
+      <td>3</td>
+      <td>0.4</td>
       <td>0</td>
-      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -1974,6 +2160,7 @@ test.head(1)
       <th>Embarked</th>
       <th>Title</th>
       <th>FamilySize</th>
+      <th>isAlone</th>
     </tr>
   </thead>
   <tbody>
@@ -1987,7 +2174,8 @@ test.head(1)
       <td>0</td>
       <td>0.0</td>
       <td>1</td>
-      <td>0</td>
+      <td>3.0</td>
+      <td>0.0</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -2018,10 +2206,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 ```
 
-
-```python
 ## cross_validataion(k-fold)
-```
 
 
 ```python
@@ -2033,7 +2218,6 @@ k_fold = KFold(n_splits=10, shuffle=True, random_state=0)
 
 ```python
 train_data.isnull().sum()
-
 ```
 
 
@@ -2048,6 +2232,7 @@ train_data.isnull().sum()
     Embarked      0
     Title         0
     FamilySize    0
+    isAlone       0
     dtype: int64
 
 
@@ -2057,10 +2242,7 @@ train_data.isnull().sum()
 import numpy as np
 ```
 
-
-```python
 ## KNN
-```
 
 
 ```python
@@ -2078,15 +2260,12 @@ print(score)
 print(round(np.mean(score*100),2))
 ```
 
-    [0.78888889 0.75280899 0.79775281 0.76404494 0.83146067 0.78651685
-     0.7752809  0.7752809  0.80898876 0.79775281]
-    78.79
+    [0.76666667 0.78651685 0.80898876 0.79775281 0.83146067 0.79775281
+     0.78651685 0.78651685 0.79775281 0.79775281]
+    79.58
     
 
-
-```python
 ## decision tree
-```
 
 
 ```python
@@ -2103,15 +2282,12 @@ print(score)
 print(round(np.mean(score*100),2))
 ```
 
-    [0.81111111 0.80898876 0.79775281 0.80898876 0.83146067 0.79775281
-     0.78651685 0.82022472 0.76404494 0.78651685]
-    80.13
+    [0.84444444 0.82022472 0.82022472 0.82022472 0.83146067 0.82022472
+     0.80898876 0.83146067 0.7752809  0.79775281]
+    81.7
     
 
-
-```python
 ## Naive Bayes
-```
 
 
 ```python
@@ -2128,15 +2304,12 @@ print(score)
 print(round(np.mean(score*100),2))
 ```
 
-    [0.76666667 0.76404494 0.7752809  0.74157303 0.78651685 0.78651685
-     0.7752809  0.79775281 0.82022472 0.79775281]
-    78.12
+    [0.81111111 0.76404494 0.76404494 0.80898876 0.79775281 0.80898876
+     0.82022472 0.84269663 0.83146067 0.80898876]
+    80.58
     
 
-
-```python
 ## svm
-```
 
 
 ```python
@@ -2153,15 +2326,12 @@ print(score)
 print(round(np.mean(score*100),2))
 ```
 
-    [0.82222222 0.78651685 0.78651685 0.82022472 0.84269663 0.79775281
-     0.79775281 0.79775281 0.80898876 0.84269663]
-    81.03
+    [0.84444444 0.80898876 0.82022472 0.82022472 0.85393258 0.82022472
+     0.82022472 0.86516854 0.83146067 0.86516854]
+    83.5
     
 
-
-```python
 ## randomforest
-```
 
 
 ```python
@@ -2178,15 +2348,12 @@ print(score)
 print(round(np.mean(score*100),2))
 ```
 
-    [0.82222222 0.79775281 0.7752809  0.79775281 0.83146067 0.80898876
-     0.82022472 0.82022472 0.76404494 0.80898876]
-    80.47
+    [0.81111111 0.82022472 0.7752809  0.78651685 0.83146067 0.79775281
+     0.83146067 0.84269663 0.7752809  0.82022472]
+    80.92
     
 
-
-```python
 # testing
-```
 
 
 ```python
