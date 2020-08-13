@@ -67,21 +67,38 @@ templates
   3 views.py에서 응답을 준다
   
 * app을 만들고 project의 settings.py의 INSTALLED_APPS에 추가해준다
-* urls.py에
-from firstapp import views
+* urls.py을 다음과 같이 구현
 
+```python
+from django.contrib import admin
+from django.urls import path
+# first_app에서 views를 import 해준다
+from first_app import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
     path('',views.helloworld, name='helloworld'),
-    path('login/',views.login, name='helloworld'),
-    path('signout/',views.signout, name='helloworld'),
-를 추가
+    path('login/',views.login, name='login'),
+    path('signout/',views.signout, name='signout'),
+   
+]
+```
 
+
+```python
+# Create your views here.
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
 def helloworld(request) :
     return HttpResponse('Hello world!!!')
 def login(request) :
     return HttpResponse('로그인 페이지')
 def signout(request) :
     return HttpResponse('잘가')
+```
+
+views가 templates를 response로 보내는법
+views가 templates에 데이터를 주는법
+
+templates는
