@@ -237,7 +237,7 @@ mson_matrix(PatientRoute,ax2)
 ```
 
 
-![png](Covid_jun_files/Covid_jun_7_0.png)
+![png](/assets/images/Covid_jun_files/Covid_jun_7_0.png)
 
 
 * 의미 없는 값을 제거해준다
