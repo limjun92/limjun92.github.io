@@ -12,6 +12,7 @@ setting.py에 app생성을 알려준다
 
 ```
 # urls.py
+from app import views
 path('', views.home, name='home')
 ```
 
