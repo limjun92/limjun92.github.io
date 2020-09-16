@@ -1,12 +1,12 @@
 # 환경설정
 
-pipenv shell
-pipenv install django
-
-django-admin startproject 프로젝트명
-python manage.py startapp 앱이름
-
-setting.py에 app생성을 알려준다
+pipenv shell  
+pipenv install django  
+  
+django-admin startproject 프로젝트명  
+python manage.py startapp 앱이름  
+  
+setting.py에 app생성을 알려준다  
 
 # 기본
 
