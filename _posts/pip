@@ -1,1 +1,2 @@
-pip freeze
+* pip freeze
+현재 설치된 모든 모듈을 
