@@ -95,3 +95,14 @@ align-items:flex-start;
 align-items:center;
 align-items:flex-end;
 ```
+
+# background-image
+
+```
+height: 100%;
+/* background-color: greenyellow; */
+background-image: url('Zipcy.jpg');
+background-repeat:no-repeat;
+background-position:center;
+background-size:cover;
+```    
