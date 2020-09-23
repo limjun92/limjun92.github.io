@@ -13,6 +13,9 @@ last_modified_at: 2020-09-23
 
 * pip install git+https://github.com/Joeclinton1/google-images-download.git
 
+> google-images-download
+>> crawling.py
+  
 ```python
 from google_images_download import google_images_download   
 
