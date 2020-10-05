@@ -3,9 +3,9 @@ title:  "google_images_download"
 excerpt: "구글 이미지 crawling"
 
 categories:
-  - crawling
+  - Crawling
 tags:
-  - crawling
+  - Crawling
 last_modified_at: 2020-09-23
 ---
 
