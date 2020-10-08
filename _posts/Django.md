@@ -1,7 +1,7 @@
 # Django
 
 * 서버 역할을 할 수 있는 웹 프레임워크
-
+ 
 * 프레임워크란, 웹 개발을 하기 위한 도구들을 미리 갖춘 것을 말한다.
 
 * 요청에 대한 처리를 하고 응답해준다
@@ -84,7 +84,7 @@ urlpatterns = [
 ]
 ```
 
-
+ 
 ```python
 # Create your views here.
 from django.shortcuts import render
