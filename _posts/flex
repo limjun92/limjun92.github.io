@@ -1,0 +1,21 @@
+display	Flex Container를 정의
+flex-flow	flex-direction와 flex-wrap의 단축 속성
+flex-direction	Flex Items의 주 축(main-axis)을 설정
+flex-wrap	Flex Items의 여러 줄 묶음(줄 바꿈) 설정
+justify-content	주 축(main-axis)의 정렬 방법을 설정
+align-content	교차 축(cross-axis)의 정렬 방법을 설정(2줄 이상)
+align-items	교차 축(cross-axis)에서 Items의 정렬 방법을 설정(1줄)
+
+display 속성으로 Flex Container를 정의합니다.
+보통 요소의 표시 방법을 display: block;, display: inline-block 혹은 display: none; 같이 사용하는 경우가 많죠.
+같은 요소의 표시 방법으로 Block이나 Inline이 아닌 Flex(display: flex, display: inline-flex)로 정의합니다.
+
+값	의미	기본값
+flex	Block 특성의 Flex Container를 정의	
+inline-flex	Inline 특성의 Flex Container를 정의	
+flex와 inline-flex는 차이는 단순합니다.
+display: flex;로 지정된 Flex Container는 Block 요소와 같은 성향(수직 쌓임)을 가지며,
+display: inline-flex로 지정된 Flex Container는 Inline(Inline Block) 요소와 같은 성향(수평 쌓임)을 가집니다.
+
+여기서 말하는 수직과 수평 쌓임은 Items가 아니라 Container라는 것에 주의합시다.
+두 값의 차이는 내부에 Items에는 영향을 주지 않습니다.
