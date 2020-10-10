@@ -19,3 +19,11 @@ display: inline-flex로 지정된 Flex Container는 Inline(Inline Block) 요소�
 
 여기서 말하는 수직과 수평 쌓임은 Items가 아니라 Container라는 것에 주의합시다.
 두 값의 차이는 내부에 Items에는 영향을 주지 않습니다.
+
+값	의미	기본값
+stretch	Container의 교차 축을 채우기 위해 Items를 늘림	stretch
+flex-start	Items를 시작점(flex-start)으로 정렬	
+flex-end	Items를 끝점(flex-end)으로 정렬	
+center	Items를 가운데 정렬	
+space-between	시작 Item은 시작점에, 마지막 Item은 끝점에 정렬되고 나머지 Items는 사이에 고르게 정렬됨	
+space-around	Items를 균등한 여백을 포함하여 정렬
