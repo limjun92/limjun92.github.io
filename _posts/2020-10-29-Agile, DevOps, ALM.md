@@ -2,6 +2,7 @@
 title:  "Agile, DevOps, ALM"
 excerpt: "Agile, DevOps, ALM"
 categories:
+  - 방법론
 tags:
   - Agile
   - DevOps
