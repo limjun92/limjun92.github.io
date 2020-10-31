@@ -1,0 +1,17 @@
+from itertools import permutations
+from itertools import combinations
+a = permutations([1,2,3,4],2)
+b = combinations([1,2,3,4],2)
+
+from collections import deque
+q = deque(c)
+q.append(1)
+q.appendleft(3)
+q.pop(1)
+q.popleft(3)
+
+import heapq
+
+heapq.heapify(scoville)
+heapq.heappop(scoville)
+heapq.heappush(scoville, first+2*second)
