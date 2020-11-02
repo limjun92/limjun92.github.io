@@ -57,6 +57,41 @@ STATIC_URL = '/static/'
 확인
 ```
 
+# base.html만들기
+
+```html
+#base.html
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>base</title>
+</head>
+<body>
+<h1>base</h1>
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>
+```
+
+```html
+#main.html
+
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>main</h1>
+    <h2>aaa</h2>
+    <h1>adsfasd;lkfjalk;sdfjlka;</h1>
+{% endblock %}
+```
 
 ---------------------
 
