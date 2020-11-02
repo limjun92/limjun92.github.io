@@ -59,6 +59,16 @@ STATIC_URL = '/static/'
 
 # base.html만들기
 
+* project 폴더에 templates 폴더를 만들고 base.html을 만든다
+
+* project 폴더의 settings.py에 TEMPLATES에 
+
+```
+'DIRS': [os.path.join(BASE_DIR, 'landmark_map', 'templates')],
+```
+
+* app 폴더에서 templates 폴더에서 app폴더를 만들고 base.html을 만든다
+
 ```html
 #base.html
 
@@ -88,8 +98,6 @@ STATIC_URL = '/static/'
 
 {% block body %}
     <h1>main</h1>
-    <h2>aaa</h2>
-    <h1>adsfasd;lkfjalk;sdfjlka;</h1>
 {% endblock %}
 ```
 
