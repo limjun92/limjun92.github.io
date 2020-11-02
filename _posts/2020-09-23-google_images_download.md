@@ -15,10 +15,8 @@ last_modified_at: 2020-09-23
 
 * 아래와 같이 폴더를 만든다
 
-
 > google-images-download
 >> crawling.py
-
 
 * crawling.py
 
