@@ -1,0 +1,11 @@
+아나콘다 설치 후 cmd(윈도우키->실행->cmd)에서 conda search python 을 입력후 엔터
+
+-> 사용 가능한 버전리스트가 나온다.
+
+conda install python=3.5.6 을 입력하면 해당 버전으로 기본 파이썬버전이 변경된다.
+
+conda create -n py35 python=3.5.6 anaconda 를 입력하여 환경을 추가하는 방법도 있다.
+
+해당 방법은 사용 시 activate py35 를 입력 #위에서 만든 환경 이름
+
+사용 종료시 deactivate py35 를 입력할 시 기본 환경으로 빠져나옴.
