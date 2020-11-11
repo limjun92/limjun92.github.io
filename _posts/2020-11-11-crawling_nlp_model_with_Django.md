@@ -53,7 +53,7 @@ LSTM 모델을 사용
 * **home에서는 크롤링을 할지 모델 학습을 할지 선택할 수 있다**
 * **모델이 없다면 크롤링을 해서 모델학습에 사용할 수 있는 데이터를 만들수 있다**
 
-![main_2.PNG](/assets/images/project/main_2.PNG)
+![main_2.PNG](/assets/images/project/crawling_nlp_model_with_Django/main_2.PNG)
 
 ---
 
