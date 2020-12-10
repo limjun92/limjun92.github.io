@@ -3,7 +3,6 @@ https://limjun92.github.io/
 * 다익스트라 정리하기
 * 플로이드 워셜 정리하기
 * 인공지능 강의
-* 인공지능 과제
 ---
 
 * page.scss .page 변경
