@@ -1,0 +1,100 @@
+---
+title:  "프로젝트에 필요한 Git"
+toc: true
+toc_sticky: true
+categories:
+  - Algorithm
+tags:
+  - Algorithm
+last_modified_at: 2021-02-17
+---
+
+## 프로젝트에 필요한 Git
+
+---
+
+* 목표
+
+```
+develop_tmp brunch를 복사해서 branch를 만들고 
+각자 기능 구현을 한 후에
+develop_tmp branch에 각각이 만든 기능을 하나로 합치는 법 
+```
+
+---
+
+## 1. 브런치 만들기
+
+### 1. 브런치 만드는 법
+
+```
+git branch yejin 
+```
+
+### 2. 브런치 확인하는 법 
+
+```
+git branch
+```
+
+```
+master
+develop_tmp
+yejin
+```
+
+### 3. 브런치 이동하는 법
+
+```
+git checkout yejin 
+```
+
+```
+master branch인 상태에서 브런치를 만들면 mater branch를 복사해오고
+develop_tmp branch에서 상태에서 브런치를 만들면 develop_tmp branch를 복사해온다.
+```
+
+## 2. 구현
+
+# 만들어진 branch 안에서 기능구현을 진행한다.
+
+## 3. merge
+
+* 필요한 구현이 완료된후
+
+### 1. 현재의 branch(내가 만든 branch)에 push를 한다.
+
+```
+git add .
+git commit -m “content”
+git push origin yejin
+```
+
+### 2. branch(ex. develop_tmp)변경사항 확인
+
+* 내가 구현을 하는 동안 merge를 해야하는 branch(ex. develop_tmp)에 변경사항이 있을 수 있기 때문에 Pull을 해서 변경사항을 현재 내가 작업하고있는 branch(ex .yejin)으로 가지고 온다.
+
+```
+git pull origin develop_tmp
+```
+
+### 3. Develop_tmp 발생하는 충돌을 해결하고 모든 기능이 정상적으로 작동되는지 확인한다.
+
+
+### 4. 현재의 branch(내가 만든 branch)에 한번 더 push를 한다.
+
+```
+git add .
+git commit -m "message"
+git push origin yejin(branch name)
+```
+
+### 5. merge는 웹에서 진행을 한다.
+
+![merge_1](/assets/images/others/merge_1.png)    
+![merge_2](/assets/images/others/merge_2.png)
+
+### 6. 코드가 잘 들어갔는지 확인해주기!
+
+#### 1. Develop_tmp 선택 후 확인
+
